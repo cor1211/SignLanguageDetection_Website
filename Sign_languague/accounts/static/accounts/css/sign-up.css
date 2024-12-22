@@ -1,0 +1,138 @@
+/* Reset một số kiểu mặc định */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container cho form đăng ký */
+.register-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-box {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #333;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 16px;
+  color: #1c1c1c;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #2a4074;
+  outline: none;
+}
+
+/* Nút đăng ký */
+.btn-register {
+  width: 100%;
+  padding: 15px;
+  background-color: #2a4074;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-register:hover {
+  background-color: #213461;
+}
+
+/* Liên kết đăng nhập */
+.login-link {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #1c1c1c;
+}
+
+.login-link a {
+  color: #2a4074;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Checkbox */
+.checkbox-label {
+  font-size: 14px;
+  color: #1c1c1c;
+  display: flex !important; /* Xếp ngang */
+  align-items: center !important; /* Căn giữa checkbox và văn bản */
+  justify-content: flex-start !important; /* Căn chỉnh phần tử trong container */
+  gap: 10px; /* Khoảng cách giữa checkbox và chữ */
+}
+
+.checkbox-label input {
+  margin: 0 !important; /* Loại bỏ margin mặc định */
+  cursor: pointer !important; /* Đảm bảo con trỏ khi hover vào checkbox */
+  width: auto !important; /* Đảm bảo checkbox không bị giãn ra quá mức */
+}
+
+/* Đảm bảo phần chữ không bị đẩy xuống */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .register-box {
+    padding: 30px;
+    max-width: 90%;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .input-group input {
+    font-size: 14px;
+  }
+
+  .btn-register {
+    font-size: 16px;
+  }
+}

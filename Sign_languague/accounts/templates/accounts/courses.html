@@ -1,0 +1,128 @@
+{% extends 'accounts/layout.html' %} {% load static %} {% block title %} Học
+ngôn ngữ {% endblock %} {% block style %}
+<link rel="stylesheet" href="{% static 'accounts/css/courses.css'%}" />
+<link rel="stylesheet" href="{% static 'accounts/css/layout.css'%}" />
+{% endblock %} {%block content %} {% if messages %} {% for message in messages %}
+<div class="message-container">
+  <p>{{ message }}</p>
+</div>
+{% endfor %} {% endif %}
+
+<div class="container">
+  <h1>Danh sách khóa học</h1>
+  <div id="course-list" class="course-list"></div>
+</div>
+
+<div class="subscibe-area">
+  <div class="subscribe-box">
+    <img
+      class="subscribe-bg"
+      src="https://cdn-main.28tech.com.vn/media/core/background/subscribe-bg.svg"
+      alt="subscribe-bg"
+    />
+    <div class="subscribe-content">
+      <h2>Gửi yêu cầu tư vấn miễn phí</h2>
+      <div class="subscibe-bottom">
+        <p>
+          Vui lòng để lại số điện thoại, chúng tôi sẽ liên hệ tư vấn bạn trong
+          thời gian sớm nhất.
+        </p>
+        <div class="subscribe-form-box">
+          <form
+            nh-form-contact="Z8LCI729JK"
+            action="{% url 'courses' %}"
+            method="POST"
+            autocomplete="off"
+            novalidate="novalidate"
+          >
+            {% csrf_token %}
+            <input
+              required=""
+              data-rule-phonevn=""
+              maxlength="11"
+              data-msg="Vui lòng nhập số điện thoại"
+              data-msg-phonevn="Số điện thoại chưa chính xác"
+              name="phone"
+              type="text"
+              placeholder="Số điện thoại..."
+              class="form-control"
+            /><button
+              nh-btn-action="submit"
+              type="submit"
+              class="rbt-btn btn-gradient hover-icon-reverse"
+            >
+              <span class="icon-reverse-wrapper"
+                ><span class="btn-text">Đăng Ký</span
+                ><span class="btn-icon"
+                  ><i class="feather-arrow-right"></i></span
+                ><span class="btn-icon"
+                  ><i class="feather-arrow-right"></i></span
+              ></span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block script%}
+<script>
+  // Lắng nghe sự kiện cuộn trang
+  window.addEventListener("scroll", function () {
+    const header = document.querySelector(".header");
+    if (window.scrollY > 50) {
+      // Nếu cuộn xuống quá 50px
+      header.classList.add("smaller"); // Thêm lớp "smaller"
+    } else {
+      header.classList.remove("smaller"); // Xóa lớp "smaller"
+    }
+  });
+  const course_list = document.getElementById("course-list");
+  function updateCourse() {
+    fetch("{% url 'get_courses' %}")
+      .then((response) => response.json())
+      .then((data) => {
+        let courses = "";
+        data.forEach((course) => {
+          const courseCard = document.createElement("div");
+          courseCard.classList.add("course-card");
+
+          courseCard.innerHTML = `
+             <img src = "${course.image}" alt = ${course.title}>
+             <div class="course-info">
+               <h2 class=course-title>
+                 ${course.title}
+               </h2>
+               <div class="rating">
+                 ${"★".repeat(Math.floor(course.rating))}
+                 ${course.rating}
+                 <span>(${course.reviews} reviews)</span>
+               </div>
+               <p class="details">Start Date: ${course.start_date}</p>
+               <p class="details">Time: ${course.time}</p>
+               <div class="price-info">
+                 <span class="sale-price">$${course.sale_price}</span>
+                 <span class="original-price">$${course.original_price}</span>
+               </div>
+             </div>
+             `;
+          course_list.appendChild(courseCard);
+        });
+      });
+  }
+  updateCourse();
+  // Lấy phần tử thông báo
+  document.addEventListener("DOMContentLoaded", function () {
+    const messages = document.querySelectorAll(".message-container");
+
+    // Hiển thị thông báo và sau 3 giây sẽ ẩn nó
+    messages.forEach((message) => {
+      message.classList.add("show");
+      setTimeout(() => {
+        message.classList.remove("show");
+        message.style.display = 'none';
+      }, 3000); // Thời gian hiển thị 3 giây
+    });
+  });
+</script>
+{% endblock %}

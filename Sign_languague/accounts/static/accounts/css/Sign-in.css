@@ -1,0 +1,265 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+
+body {
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f3f3f3;
+}
+
+.Login {
+  background-color: black;
+  color: white;
+  padding: 0.3125rem 0;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.Login a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 0.75rem;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid rgb(143, 142, 142);
+  background-color: rgb(255, 255, 255);
+  z-index: 1000;
+  padding: 0 5%;
+}
+
+.header_img {
+  width: 6rem;
+  height: 4.375rem;
+}
+
+.header-select {
+  height: max-content;
+  width: max-content;
+  border-radius: 10px;
+  padding: 0.4rem 0.1rem;
+  margin-bottom: 0;
+}
+
+.header_menu {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+}
+
+.menu_item {
+  text-align: center;
+}
+
+.menu_item a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  font-size: large;
+  font-size: 1.1rem;
+}
+
+.menu_item:hover a {
+  color: #09f;
+}
+
+.dangKy,
+.dangNhap {
+  border-bottom: 1px solid black;
+}
+
+.dangKy:hover {
+  border-bottom: 1px solid white;
+}
+
+.dangNhap:hover {
+  border-bottom: 1px solid white;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.inner-container {
+  width: 25rem;
+  padding: 1.25rem;
+  background-color: white;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin: 1.25rem 0;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container .forgot-password {
+  font-size: 0.9rem;
+  text-align: left;
+  margin-top: 0.625rem;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.25rempx;
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 0.625rem;
+}
+
+label {
+  font-size: 1rem;
+  margin-bottom: 0.3125rem;
+  color: #555;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 0.625rem;
+  margin-bottom: 0.625rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.column {
+  flex: 1;
+}
+
+.column .box {
+  margin-right: 0.3125rem;
+}
+
+.column .commitment {
+  font-size: 0.8rem;
+  text-align: left;
+  margin: 0.5rem 0;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.625rem;
+}
+
+button:hover {
+  background-color: #09f;
+}
+
+.container p {
+  text-align: center;
+  margin-top: 0.8rem;
+}
+
+span {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+footer {
+  border-top: 1px solid rgb(143, 142, 142);
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  padding: 1.25rem;
+  background-color: #f1f1f1;
+}
+
+.footer-column {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.footer-column h3 {
+  font-size: 1.4em;
+  margin-bottom: 0.625rem;
+}
+
+.footer-column a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.8rem;
+}
+
+.footer-column a:hover {
+  color: #09f;
+  text-decoration: underline;
+}
+.footer-column p {
+  line-height: 1.4;
+  text-align: left;
+  font-size: 0.8rem;
+}
+
+.footer-container .footer-introduce i {
+  font-size: 0.6rem;
+}
+
+#inner-icon-facebook {
+  color: #09f;
+}
+
+#inner-icon-youtobe {
+  color: red;
+}
+
+#inner-icon-twitter {
+  color: #000;
+}
+
+#inner-icon-instagram {
+  background: radial-gradient(
+    circle at 30% 110%,
+    #ffdb8b 0%,
+    #ee653d 25%,
+    #d42e81 50%,
+    #a237b6 75%,
+    #3e57bc 100%
+  );
+  /* -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+}
+
+.footer-column i {
+  font-size: 1.6em;
+  color: #333;
+  margin-right: 10px;
+  cursor: pointer;
+}

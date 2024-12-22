@@ -1,0 +1,165 @@
+<header class="header">
+  <div class="header-left">
+    <img src="https://via.placeholder.com/50" alt="Logo" class="logo" />
+    <nav class="nav">
+      <a href="#">Dịch Thời Gian Thực</a>
+      <a href="#">Dịch Video</a>
+      <a href="#">Học Ngôn Ngữ</a>
+    </nav>
+  </div>
+  <div class="header-right">
+    <div class="user-profile">
+      <img
+        src="https://via.placeholder.com/40"
+        alt="User Avatar"
+        class="avatar"
+      />
+      <div class="dropdown">
+        <button class="dropdown-btn">☰</button>
+        <div class="dropdown-content">
+          <a href="#">Thông Tin Cá Nhân</a>
+          <a href="#">Đăng Xuất</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Tổng thể */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #d9534f;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+  }
+
+  .nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 16px;
+    transition: color 0.3s;
+  }
+
+  .nav a:hover {
+    color: #ffcc00;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+
+  .user-profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    min-width: 160px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .dropdown-content a {
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    display: block;
+    transition: background-color 0.3s;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #555;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Responsive */
+  @media screen and (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .header-left {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .nav {
+      margin-top: 10px;
+    }
+
+    .nav a {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+
+    .header-right {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

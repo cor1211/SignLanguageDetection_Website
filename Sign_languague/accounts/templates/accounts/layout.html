@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} {% endblock %}</title>
+    {% block style %} {% endblock %}
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-left">
+        <a href="{% url 'home'%}"
+          ><img
+            src="../../static/accounts/images/pngtree-green-lucky-four-leaf-clover-illustration-image_1218020-removebg-preview.png"
+            alt="Logo"
+            class="logo"
+        /></a>
+
+        <nav class="nav">
+          <a href="{% url 'home' %}">Dịch Thời Gian Thực</a>
+          <a href="#">Dịch Video</a>
+          <a href="{% url 'courses' %}">Học Ngôn Ngữ</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <div class="user-profile">
+          <img
+            src="{% static 'accounts/images/Luu Cong Vinh.jpg' %}"
+            alt="User Avatar"
+            class="avatar"
+          />
+          <div class="dropdown">
+            <button class="dropdown-btn">☰</button>
+            <div class="dropdown-content">
+              <a href="#">Thông Tin Cá Nhân</a>
+              <a href="{% url 'logout' %}">Đăng Xuất</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    {% block content %} {% endblock %} {% block script %} {% endblock %}
+  </body>
+</html>

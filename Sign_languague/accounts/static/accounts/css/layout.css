@@ -1,0 +1,112 @@
+body {
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column; /* Thêm dòng này để xếp theo chiều dọc */
+  justify-content: flex-start; /* Đảm bảo các phần tử xếp từ trên xuống dưới */
+  height: 100vh;
+  color: #333;
+  padding: 0;
+  margin: 0;
+}
+
+/* Header */
+.header {
+   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #325199;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: padding 0.3s ease, height 0.3s ease; /* Thêm hiệu ứng chuyển đổi */
+}
+
+/* Header khi cuộn */
+.header.smaller {
+  padding: 5px 20px; /* Giảm padding khi cuộn */
+  height: 60px; /* Giảm chiều cao */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.nav a:hover {
+  color: #ffcc00;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 32.5px;
+  right: 0;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+  min-width: 160px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  display: block;
+  transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+  background-color: #555;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

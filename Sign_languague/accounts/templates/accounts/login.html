@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}" />
+    <style>
+      /* Style chung cho thông báo */
+      .message-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #2a4074;
+        color: #fff;
+        padding: 15px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 1000;
+      }
+
+      /* Khi thông báo được hiển thị */
+      .message-container.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+
+  <body>
+    {% if messages %} {% for message in messages %}
+    <div class="message-container">
+      <p>{{ message }}</p>
+    </div>
+    {% endfor %} {% endif %}
+    <div class="login-container">
+      <div class="login-box">
+        <h2>Đăng Nhập</h2>
+
+        <!-- Form Đăng Nhập -->
+        <form action="{% url 'login' %}" method="POST">
+          {% csrf_token %}
+          <div class="input-group">
+            <label for="username">Tên đăng nhập</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              placeholder="Nhập tên đăng nhập"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="password">Mật khẩu</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              placeholder="Nhập mật khẩu"
+            />
+          </div>
+
+          <div class="form-footer">
+            <button type="submit" class="btn-login">Đăng Nhập</button>
+            <div class="forgot-password">
+              <a href="#">Quên mật khẩu?</a>
+            </div>
+            <div class="signup">
+              <span>Bạn chưa có tài khoản?</span>
+              <a href="{% url 'signup' %}">Đăng ký ngay</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      // Lấy phần tử thông báo
+      document.addEventListener("DOMContentLoaded", function () {
+        const messages = document.querySelectorAll(".message-container");
+
+        // Hiển thị thông báo và sau 3 giây sẽ ẩn nó
+        messages.forEach((message) => {
+          message.classList.add("show");
+          setTimeout(() => {
+            message.classList.remove("show");
+            message.style.display = 'none';
+          }, 3500); // Thời gian hiển thị 3 giây
+        });
+      });
+    </script>
+  </body>
+</html>

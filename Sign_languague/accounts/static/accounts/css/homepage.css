@@ -1,0 +1,259 @@
+/* Tổng thể */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column; /* Thêm dòng này để xếp theo chiều dọc */
+  justify-content: flex-start; /* Đảm bảo các phần tử xếp từ trên xuống dưới */
+  height: 100vh;
+  color: #333;
+  padding: 0;
+  margin: 0;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #325199;
+  color: white;
+  /* position: sticky; */
+  /* top: 0; */
+  /* z-index: 100; */
+  transition: padding 0.3s ease, height 0.3s ease; /* Thêm hiệu ứng chuyển đổi */
+}
+
+/* Header khi cuộn */
+.header.smaller {
+  padding: 5px 20px; /* Giảm padding khi cuộn */
+  height: 60px; /* Giảm chiều cao */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.nav a:hover {
+  color: #ffcc00;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 32.5px;
+  right: 0;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+  min-width: 160px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  display: block;
+  transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+  background-color: #555;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Container chính */
+.container {
+  text-align: center;
+  max-width: 800px;
+  width: 90%;
+  margin: 15px auto; /* Đảm bảo cách đều giữa header và container */
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+/* Tiêu đề */
+.title {
+  color: #325199;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+/* Container cho video */
+.video-container {
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+#video {
+  width: 100%;
+  height: auto;
+  border: 2px solid #325199;
+  border-radius: 8px;
+}
+
+/* Textarea */
+.message-box {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none;
+  line-height: 1.5;
+  color: #333;
+}
+
+.message-box:focus {
+  outline: none;
+  border-color: #325199;
+  box-shadow: 0 0 8px rgba(42, 40, 195, 0.5);
+}
+
+/* Video container */
+.video-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 100vh; /* Tối đa là toàn màn hình */
+  overflow: hidden;
+}
+
+#video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Giữ tỷ lệ khung hình */
+  transition: transform 0.3s ease; /* Thêm hiệu ứng chuyển đổi khi lật ảnh */
+}
+
+.fullscreen-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 20px; /* Tăng kích thước của biểu tượng */
+  cursor: pointer;
+  border-radius: 50%; /* Làm nút tròn */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.fullscreen-btn:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  scale: 1.15;
+}
+
+.fullscreen-btn i {
+  font-size: 18px; /* Điều chỉnh kích thước biểu tượng */
+}
+
+.flip-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 10px; /* Đặt nút lật ảnh ở góc dưới trái */
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.flip-btn:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  scale: 1.15;
+}
+
+/* Style chung cho thông báo */
+.message-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #2a4074;
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+}
+
+/* Khi thông báo được hiển thị */
+.message-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}

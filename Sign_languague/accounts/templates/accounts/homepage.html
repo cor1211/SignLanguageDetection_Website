@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang chủ</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'accounts/css/homepage.css' %}" />
+    <style>
+      .message-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #2a4074;
+        color: #fff;
+        padding: 15px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 1000;
+      }
+      /* Khi thông báo được hiển thị */
+      .message-container.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+
+  {% if messages %} {% for message in messages %}
+  <div class="message-container">
+    <p>{{ message }}</p>
+  </div>
+  {% endfor %} {% endif %}
+  <body>
+    <header class="header">
+      <div class="header-left">
+        <a href="{% url 'home'%}"
+          ><img
+            src="../../static/accounts/images/pngtree-green-lucky-four-leaf-clover-illustration-image_1218020-removebg-preview.png"
+            alt="Logo"
+            class="logo"
+        /></a>
+
+        <nav class="nav">
+          <a href="{% url 'home' %}">Dịch Thời Gian Thực</a>
+          <a href="#">Dịch Video</a>
+          <a href="{% url 'courses' %}">Học Ngôn Ngữ</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <div class="user-profile">
+          <img
+            src="{% static 'accounts/images/Luu Cong Vinh.jpg' %}"
+            alt="User Avatar"
+            class="avatar"
+          />
+          <div class="dropdown">
+            <button class="dropdown-btn">☰</button>
+            <div class="dropdown-content">
+              <a href="#">Thông Tin Cá Nhân</a>
+              <a href="{% url 'logout' %}">Đăng Xuất</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <h1 class="title">Sign Language Translate</h1>
+
+      <!-- Dropdown để chọn camera -->
+      <label for="cameraSelect">Chọn Camera:</label>
+      <select id="cameraSelect"></select>
+
+      <div class="video-container">
+        <img src="{% url 'video_feed' %}" id="video" />
+        <button id="fullscreenBtn" class="fullscreen-btn">
+          <i class="fas fa-expand"></i>
+          <!-- Biểu tượng fullscreen -->
+        </button>
+        <button id="flipBtn" class="flip-btn">🔄</button>
+
+        <!-- Nút lật ảnh -->
+      </div>
+      <textarea
+        readonly
+        id="message"
+        class="message-box"
+        rows="8"
+        cols="50"
+        placeholder="Loading history..."
+      ></textarea>
+    </div>
+
+    <script>
+      const videoElement = document.getElementById("video");
+      const messageElement = document.getElementById("message");
+      const cameraSelect = document.getElementById("cameraSelect");
+      const fullscreenBtn = document.getElementById("fullscreenBtn");
+      const videoContainer = document.querySelector(".video-container");
+
+      // Hàm để cập nhật lịch sử
+      function updateHistory() {
+        fetch("{% url 'get_user_history' %}")
+          .then((response) => response.json())
+          .then((data) => {
+            let historyText = "";
+            data.forEach((history) => {
+              historyText += `${history.timestamp}: ${history.word}\n`;
+            });
+            messageElement.value = historyText;
+          })
+          .catch((error) => console.log("Error fetching history:", error));
+      }
+      // Gọi updateHistory mỗi giây
+      setInterval(updateHistory, 1000);
+      // Hàm để lấy danh sách các camera
+      function getCameras() {
+        navigator.mediaDevices.enumerateDevices().then((devices) => {
+          const videoDevices = devices.filter(
+            (device) => device.kind === "videoinput"
+          );
+          cameraSelect.innerHTML = ""; // Xóa các tùy chọn cũ
+
+          videoDevices.forEach((device, index) => {
+            const option = document.createElement("option");
+            option.value = device.deviceId;
+            option.text = device.label || `Camera ${index + 1}`;
+            cameraSelect.appendChild(option);
+          });
+        });
+      }
+
+      // Hàm để thay đổi camera khi người dùng chọn
+      function changeCamera() {
+        const selectedDeviceId = cameraSelect.value;
+
+        // Thay đổi URL video_feed với camera ID
+        videoElement.src = `{% url 'video_feed' %}?device_id=${selectedDeviceId}`;
+      }
+
+      // Sự kiện thay đổi camera
+      cameraSelect.addEventListener("change", changeCamera);
+
+      // Tải danh sách camera khi trang tải
+      getCameras();
+
+      // Kích hoạt chế độ fullscreen
+      fullscreenBtn.addEventListener("click", () => {
+        if (!document.fullscreenElement) {
+          if (videoContainer.requestFullscreen) {
+            videoContainer.requestFullscreen();
+          } else if (videoContainer.webkitRequestFullscreen) {
+            // Safari support
+            videoContainer.webkitRequestFullscreen();
+          } else if (videoContainer.msRequestFullscreen) {
+            // IE11 support
+            videoContainer.msRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
+      });
+      // Lật ảnh
+      flipBtn.addEventListener("click", () => {
+        // Kiểm tra trạng thái hiện tại, nếu chưa lật thì lật, nếu đã lật thì trở về
+        if (videoElement.style.transform === "scaleX(-1)") {
+          videoElement.style.transform = "scaleX(1)"; // Lật về trạng thái bình thường
+        } else {
+          videoElement.style.transform = "scaleX(-1)"; // Lật video theo chiều ngang
+        }
+      });
+
+      // Lắng nghe sự kiện cuộn trang
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector(".header");
+        if (window.scrollY > 50) {
+          // Nếu cuộn xuống quá 50px
+          header.classList.add("smaller"); // Thêm lớp "smaller"
+        } else {
+          header.classList.remove("smaller"); // Xóa lớp "smaller"
+        }
+      });
+      // Lấy phần tử thông báo
+      document.addEventListener("DOMContentLoaded", function () {
+        const messages = document.querySelectorAll(".message-container");
+
+        // Hiển thị thông báo và sau 3 giây sẽ ẩn nó
+        messages.forEach((message) => {
+          message.classList.add("show");
+          setTimeout(() => {
+            message.classList.remove("show");
+            message.style.display = 'none';
+          }, 3000); // Thời gian hiển thị 3 giây
+        });
+      });
+    </script>
+  </body>
+</html>
